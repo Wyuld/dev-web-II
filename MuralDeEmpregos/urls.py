@@ -1,21 +1,23 @@
-"""MuralDeEmpregos URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
+from core.views.inscricaoApiView import InscricaoDetail, InscricaoViewSet
+from core.models import VagaDeEmprego
+from core.views.vagaDeEmpregoApiView import VagaDeEmpregoViewSet, VagasDeEmpregoDetail
+from core.views.empregadorApiView import EmpregadorDetail, EmpregadorViewSet
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from core import views
+from rest_framework import routers
+
+## TODO URLS on router
+router = routers.DefaultRouter()
+# router.register(r"vagas-apiviews", views.VagaDeEmpregoViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('empregadores-apiview/', EmpregadorViewSet.as_view()),
+    path('empregadores-apiview/<int:id>/', EmpregadorDetail.as_view()),
+    path('vagas-apiview/', VagaDeEmpregoViewSet.as_view()),
+    path('vagas-apiview/<int:id>/', VagasDeEmpregoDetail.as_view()),
+    path('inscricoes-apiview/', InscricaoViewSet.as_view()),
+    path('inscricoes-apiview/<int:id>/', InscricaoDetail.as_view()),
+    # path('api/', include(routers.urls))
 ]
