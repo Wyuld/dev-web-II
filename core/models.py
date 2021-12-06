@@ -22,4 +22,4 @@ class Inscricao(models.Model):
     class Meta:
         verbose_name_plural="Inscricoes"
     usuario = models.ForeignKey(User, on_delete=PROTECT, related_name="inscricoes")
-    empregador = models.ForeignKey(Empregador, on_delete=PROTECT, related_name="inscricoes", default=" ")
+    vaga = models.ForeignKey(VagaDeEmprego, on_delete=PROTECT, related_name="inscricoes")
